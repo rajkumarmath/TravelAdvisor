@@ -8,6 +8,10 @@ load_dotenv()
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 app = FastAPI(title="Travel Safety Advisor API")
+@app.get("/")
+def root():
+    return {"message": "TravelAdvisor Backend is live!"}
+
 
 @app.get("/advice", response_model=TravelAdvice)
 async def get_advice(
