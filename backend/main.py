@@ -5,7 +5,7 @@ import openai
 from backend.models import TravelAdvice
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 app = FastAPI(title="Travel Safety Advisor API")
 
