@@ -16,4 +16,4 @@ typing-inspection==0.4.1
 typing_extensions==4.15.0
 urllib3==2.5.0
 uvicorn==0.37.0
-openai==0.27.15
+openai==1.109.1
