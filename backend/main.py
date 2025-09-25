@@ -1,18 +1,33 @@
 import os
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import openai
 from backend.models import TravelAdvice
 
+# Load environment variables
 load_dotenv()
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
+# Create FastAPI app
 app = FastAPI(title="Travel Safety Advisor API")
+
+# CORS setup: allow requests from your frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # For testing, allow all. Later, replace "*" with your frontend URL.
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Root endpoint for quick health check
 @app.get("/")
 def root():
     return {"message": "TravelAdvisor Backend is live!"}
 
 
+# Travel advice endpoint
 @app.get("/advice", response_model=TravelAdvice)
 async def get_advice(
     city: str = Query(..., description="City name for travel advisory"),
